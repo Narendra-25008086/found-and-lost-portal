@@ -1,51 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Lost & Found Portal</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lost & Found Portal</title>
+
+<link rel="stylesheet" href="style.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
+
 <body>
 
-  <h1>Lost & Found Portal</h1>
+<h1>Lost & Found Portal</h1>
 
-  <form id="lostForm">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="text" id="item" placeholder="Item Name" required>
-    
-    <select id="type" required>
-      <option value="">Select Type</option>
-      <option>Lost</option>
-      <option>Found</option>
-    </select>
+<div class="container">
 
-    <textarea id="description" placeholder="Item Description" required></textarea>
+<form id="lostForm">
 
-    <input type="text" id="contact" placeholder="Contact Number" required>
-    <input type="file" id="imageFile" accept="image/*" required>
+<input type="text" id="name" placeholder="Your Name" required>
 
-    
-  </form>
-  <button type="button" onclick="submitForm()">Submit</button>
+<label>Year</label>
 
-  <h2>All Items</h2>
+<select id="year" required>
 
-<input 
-  type="text" 
-  id="searchInput" 
-  placeholder="Search by name, item, type..." 
-  onkeyup="filterItems()"
-  class="search-bar"
+<option value="">Select Year</option>
+
+<option>1st year</option>
+<option>2nd year</option>
+<option>3rd year</option>
+<option>4th year</option>
+
+</select>
+<label>Department</label>
+
+<select id="dept" required>
+
+<option value="">Select Department</option>
+
+<option>CSE</option>
+<option>IT</option>
+<option>AIML</option>
+<option>CS</option>
+<option>NVM</option>
+<option>AIDS</option>
+<option>ECE</option>
+<option>EEE</option>
+<option>MECH</option>
+<option>CIVIL</option>
+<option>CHEMICAL</option>
+<option>BIOTECH</option>
+
+</select>
+<input type="text" id="item" placeholder="Item Name" required>
+
+<select id="type" onchange="toggleQuestion()" required>
+
+<option value="">Select Type</option>
+
+<option value="Lost">Lost</option>
+
+<option value="Found">Found</option>
+
+</select>
+
+<textarea id="description" placeholder="Item Description" required></textarea>
+
+<!-- Only Founder Section -->
+
+<div id="verifySection" style="display:none">
+
+<input type="text" id="question" placeholder="Verification Question">
+
+<input type="text" id="secret" placeholder="Correct Answer">
+
+</div>
+
+<input type="text" id="contact" placeholder="Contact Number" required>
+
+<input type="file" id="imageFile" accept="image/*" required>
+
+</form>
+
+<button onclick="submitForm()">Submit</button>
+<div id="loader" class="loader"></div>
+
+</div>
+
+<h2>Items</h2>
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search items..."
+onkeyup="filterItems()"
+class="search-bar"
 />
 
 <div id="itemsContainer"></div>
 
-  <footer>
-  © 2026 Lost & Found System | Developed by 
-  <a href="https://www.linkedin.com/in/narendra-krishnan-k-s-a0646137b/" target="_blank">
-    Narendra Krishnan KS (AIML)
-  </a>
+<footer>
+
+Lost & Found Portal  
+Developed by <a href="https://www.linkedin.com/in/narendra-krishnan-k-s-a0646137b/" target="_blank"> Narendra Krishnan KS (AIML)</a> 
+
+
 </footer>
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
