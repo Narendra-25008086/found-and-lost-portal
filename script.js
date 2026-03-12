@@ -236,16 +236,18 @@ if(answer === null) return;
 
 if(answer.toLowerCase() === secret.toLowerCase()){
 
+
 alert(
 
-"Owner Verified\n\n"+
-"Name: "+name+"\n"+
-"Year: "+year+"\n"+
-"Department: "+dept+"\n"+
-"Contact: "+contact+"\n\n"+
-"Kindly contact the owner."
+"Owner Verified ✅\n\n"+
+"Please contact the owner to claim the item.\n\n"+
+"Name: " + name + "\n"+
+"Year: " + year + "\n"+
+"Department: " + dept + "\n"+
+"Contact: " + contact
 
 );
+
 
 // Change button to claimed
 btn.innerText = "Claimed ✅";
