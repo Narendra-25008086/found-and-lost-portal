@@ -195,7 +195,7 @@ let verifyBtn = "";
 if(type === "Found"){
 
 verifyBtn = `
-<button onclick="verifyOwner('${question}','${secret}','${name}','${year}','${dept}','${contact}')">
+<button onclick="verifyOwner('${question}','${secret}','${name}','${year}','${dept}','${contact}', this)">
 Verify Owner
 </button>
 `;
@@ -228,7 +228,7 @@ container.appendChild(card);
 // VERIFY OWNER
 // ===============================
 
-function verifyOwner(question,secret,name,year,dept,contact){
+function verifyOwner(question,secret,name,year,dept,contact,btn){
 
 const answer = prompt(question);
 
@@ -247,6 +247,11 @@ alert(
 
 );
 
+// Change button to claimed
+btn.innerText = "Claimed ✅";
+btn.style.background = "green";
+btn.disabled = true;
+
 }else{
 
 alert("Wrong Answer");
@@ -254,7 +259,6 @@ alert("Wrong Answer");
 }
 
 }
-
 
 
 // ===============================

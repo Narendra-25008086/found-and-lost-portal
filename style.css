@@ -164,3 +164,50 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg);}
 
 }
+/* Verify button */
+
+.card button{
+
+width:100%;
+
+padding:10px;
+
+margin-top:10px;
+
+border:none;
+
+border-radius:8px;
+
+background:#ffcc00;
+
+color:black;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
+/* Hover effect */
+
+.card button:hover{
+
+background:#ffb300;
+
+}
+
+
+/* Claimed button */
+
+.claimed{
+
+background:#28a745 !important;
+
+color:white;
+
+cursor:not-allowed;
+
+}
