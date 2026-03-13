@@ -13,7 +13,6 @@ section.style.display=(type==="Found")?"block":"none";
 }
 
 
-// helper function
 function nameInput(id){
 return document.getElementById(id).value.trim();
 }
@@ -43,32 +42,31 @@ const imageFile=document.getElementById("imageFile").files[0];
 
 if(!name||!year||!dept||!item||!type||!description||!contact||!imageFile){
 
-alert("Fill all fields");
+alert("Please fill all fields");
 
 loader.style.display="none";
 btn.disabled=false;
-
 return;
 
 }
 
-// upload image
+
+// Upload Image
 
 const formData=new FormData();
 formData.append("image",imageFile);
 
-const upload=await fetch(
-`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
-{
+const upload=await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,{
 method:"POST",
 body:formData
 });
 
 const uploadData=await upload.json();
+
 const imageURL=uploadData.data.url;
 
 
-// send data to sheet
+// Send Data
 
 const data={
 name,
@@ -122,11 +120,13 @@ const container=document.getElementById("itemsContainer");
 
 container.innerHTML="";
 
+const fragment=document.createDocumentFragment();
+
 for(let i=data.length-1;i>=1;i--){
 
 const row=data[i];
 
-addCard(
+const card=createCard(
 i,
 row[0],
 row[1],
@@ -141,16 +141,20 @@ row[9],
 row[10]
 );
 
-}
+fragment.appendChild(card);
 
 }
 
+container.appendChild(fragment);
 
-function addCard(rowIndex,name,year,dept,item,type,description,question,secret,contact,imageURL,status){
+}
 
-const container=document.getElementById("itemsContainer");
+
+
+function createCard(rowIndex,name,year,dept,item,type,description,question,secret,contact,imageURL,status){
 
 const card=document.createElement("div");
+
 card.className="card";
 
 let verifyBtn="";
@@ -171,24 +175,25 @@ verifyBtn=`<button onclick="verifyOwner('${question}','${secret}',${rowIndex},th
 
 card.innerHTML=`
 
-<img src="${imageURL}">
+<img src="${imageURL}" loading="lazy">
 
-<p><b>Name:</b> ${name}</p>
+<p class="name"><b>Name:</b> ${name}</p>
 
+<p class="year"><b>Year:</b> ${year}</p>
 
-<p><b>Item:</b> ${item}</p>
+<p class="dept"><b>Department:</b> ${dept}</p>
 
-<p><b>Type:</b> ${type}</p>
+<p class="item"><b>Item:</b> ${item}</p>
 
-<p><b>Description:</b> ${description}</p>
+<p class="desc"><b>Description:</b> ${description}</p>
 
-<p><b>Contact:</b> ${contact}</p>
+<p class="contact"><b>Phone:</b> ${contact}</p>
 
 ${verifyBtn}
 
 `;
 
-container.appendChild(card);
+return card;
 
 }
 
@@ -196,11 +201,18 @@ container.appendChild(card);
 
 async function verifyOwner(question,secret,rowIndex,btn){
 
-const answer = prompt(question);
+const answer=prompt(question);
 
-if(answer === null) return;
+if(answer===null)return;
 
-if(answer.toLowerCase() === secret.toLowerCase()){
+if(answer.toLowerCase()===secret.toLowerCase()){
+
+const card=btn.closest(".card");
+
+const name=card.querySelector(".name").innerText;
+const year=card.querySelector(".year").innerText;
+const dept=card.querySelector(".dept").innerText;
+const contact=card.querySelector(".contact").innerText;
 
 btn.innerText="Claimed ✅";
 btn.classList.add("claimed");
@@ -214,29 +226,26 @@ row:rowIndex
 })
 });
 
-// get card info
-const card = btn.closest(".card");
-
-const item = card.querySelector("p:nth-child(2)").innerText;
-const contact = card.querySelector("p:nth-child(5)").innerText;
 
 alert(
+
 "✅ Owner Verified!\n\n"+
 "Kindly contact the founder to claim the item.\n\n"+
-name + "\n" +
-year + "\n" +
-dept + "\n" +
-item + "\n" +
+name+"\n"+
+year+"\n"+
+dept+"\n"+
 contact
+
 );
 
 }else{
 
-alert("❌ Wrong Answer");
+alert("Wrong Answer");
 
 }
 
 }
+
 
 
 function filterItems(){
@@ -249,11 +258,12 @@ cards.forEach(card=>{
 
 const text=card.innerText.toLowerCase();
 
-card.style.display=text.includes(input)?"block":"none";
+card.style.display=text.includes(input)?"":"none";
 
 });
 
 }
+
 
 
 window.onload=loadItems;
