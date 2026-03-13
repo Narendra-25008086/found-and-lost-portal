@@ -223,7 +223,10 @@ const contact = card.querySelector("p:nth-child(5)").innerText;
 alert(
 "✅ Owner Verified!\n\n"+
 "Kindly contact the founder to claim the item.\n\n"+
-item+"\n"+
+name + "\n" +
+year + "\n" +
+dept + "\n" +
+item + "\n" +
 contact
 );
 
